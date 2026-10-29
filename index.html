@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dontup · Sistema para clínicas odontológicas</title>
+  <meta name="description" content="Agenda, prontuário, orçamento, financeiro e um funil que traz paciente de volta. O sistema para clínicas odontológicas que mostra onde está o dinheiro parado.">
+  <meta name="theme-color" content="#161a22">
+  <meta property="og:title" content="Dontup: sua clínica organizada e cheia">
+  <meta property="og:description" content="Agenda, prontuário, orçamento, financeiro e funil de oportunidades em um só sistema. Inauguração em breve.">
+  <meta property="og:type" content="website">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo" id="topo">
+    <div class="topo-in">
+      <a class="marca" href="#inicio" aria-label="Dontup, início">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#161a22"/><path d="M10 9c-2 0-3.5 1.8-3.5 4.4 0 3 1.2 4.6 2 7.6.5 2 1 3.5 2.2 3.5 1.4 0 1.6-3 2.4-4.6.4-.8.8-1.2 1.4-1.2h3c.6 0 1 .4 1.4 1.2.8 1.6 1 4.6 2.4 4.6 1.2 0 1.7-1.5 2.2-3.5.8-3 2-4.6 2-7.6C25.5 10.8 24 9 22 9c-2 0-3.3 1.2-6 1.2S12 9 10 9z" fill="#ff6b4a"/></svg>
+        <span>Dontup</span>
+      </a>
+      <nav class="menu" aria-label="Seções">
+        <a href="#recursos">Recursos</a>
+        <a href="#oportunidades">Oportunidades</a>
+        <a href="#planos">Planos</a>
+        <a href="#duvidas">Dúvidas</a>
+      </nav>
+      <div class="topo-acoes">
+        <span class="acesso" data-acesso>
+          <a class="btn btn-linha btn-sm" data-sistema aria-disabled="true" role="link" tabindex="0" aria-describedby="dica-acesso">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            Acessar sistema
+          </a>
+          <span class="dica" id="dica-acesso" role="tooltip">Liberado no dia da inauguração</span>
+        </span>
+        <a class="btn btn-coral btn-sm so-desk" href="#lancamento">Quero ser avisado</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <nav class="menu-movel" id="menu-movel" aria-label="Seções" hidden>
+      <a href="#recursos">Recursos</a>
+      <a href="#oportunidades">Oportunidades</a>
+      <a href="#planos">Planos</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a class="btn btn-coral" href="#lancamento">Quero ser avisado</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- Abertura: o funil trabalhando ao vivo -->
+    <section class="hero" id="inicio">
+      <div class="hero-txt">
+        <p class="selo"><span class="pulso" aria-hidden="true"></span><span data-inauguracao>Inauguração em breve</span></p>
+        <h1 class="hero-titulo">
+          <span class="linha"><span>Sua clínica</span></span>
+          <span class="linha"><span>organizada.</span></span>
+          <span class="linha"><span>Sua agenda</span></span>
+          <span class="linha"><span>cheia.</span></span>
+        </h1>
+        <p class="hero-sub">Agenda, prontuário, orçamento e financeiro em um só lugar, com um funil que mostra quem precisa voltar e quanto dinheiro está parado em orçamentos.</p>
+        <div class="hero-cta">
+          <a class="btn btn-coral btn-lg" href="#lancamento">Quero ser avisado</a>
+          <a class="btn btn-linha btn-lg" href="#recursos">Ver o que o sistema faz</a>
+        </div>
+        <p class="hero-nota">30 dias grátis na inauguração. Sem cartão de crédito.</p>
+      </div>
+
+      <div class="hero-demo" aria-label="Demonstração: o funil de oportunidades movendo pacientes de orçamento enviado até fechado">
+        <div class="janela">
+          <div class="janela-barra" aria-hidden="true"><i></i><i></i><i></i><span>app.dontup.com.br</span></div>
+          <div class="janela-corpo">
+            <aside class="mini-menu" aria-hidden="true">
+              <b class="mini-logo"></b>
+              <span></span><span class="on"></span><span></span><span></span><span></span><span></span>
+            </aside>
+            <div class="painel">
+              <div class="painel-topo">
+                <strong>Oportunidades</strong>
+                <span class="chip-coral">+ Oportunidade</span>
+              </div>
+              <div class="kpis">
+                <div><small>Em aberto</small><b data-kpi="aberto">R$ 0</b></div>
+                <div><small>Fechado no mês</small><b class="menta" data-kpi="ganho">R$ 0</b></div>
+                <div class="kpi-meta"><small>Meta do mês</small><span class="barra"><i data-kpi="meta"></i></span></div>
+              </div>
+              <div class="quadro" data-quadro>
+                <div class="coluna" data-col="0"><h4>Orçamento enviado</h4><div class="cartoes"></div></div>
+                <div class="coluna" data-col="1"><h4>Em contato</h4><div class="cartoes"></div></div>
+                <div class="coluna" data-col="2"><h4>Avaliação</h4><div class="cartoes"></div></div>
+                <div class="coluna ganho" data-col="3"><h4>Fechado</h4><div class="cartoes"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="aviso-flutuante" data-toast aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Faixa de dores -->
+    <section class="faixa" aria-label="Problemas que o Dontup resolve">
+      <div class="faixa-trilho" aria-hidden="true">
+        <span>Orçamento que ninguém cobrou</span><span>Paciente que sumiu depois da limpeza</span><span>Taxa da maquininha calculada na mão</span><span>Agenda no papel</span><span>Indicação que ninguém agradeceu</span><span>Conta fixa esquecida</span><span>Retorno vencido</span><span>Planilha que só uma pessoa entende</span>
+        <span>Orçamento que ninguém cobrou</span><span>Paciente que sumiu depois da limpeza</span><span>Taxa da maquininha calculada na mão</span><span>Agenda no papel</span><span>Indicação que ninguém agradeceu</span><span>Conta fixa esquecida</span><span>Retorno vencido</span><span>Planilha que só uma pessoa entende</span>
+      </div>
+    </section>
+
+    <!-- Recursos: explorador -->
+    <section class="secao recursos" id="recursos">
+      <div class="cabeca">
+        <h2>Tudo o que a clínica usa no dia a dia. Nada que atrapalhe.</h2>
+        <p>Feito para a recepção aprender em uma tarde e para o dono enxergar a clínica inteira em uma tela.</p>
+      </div>
+
+      <div class="explorador" data-explorador>
+        <div class="abas" role="tablist" aria-label="Áreas do sistema">
+          <button role="tab" id="aba-agenda" aria-controls="p-agenda" aria-selected="true">Agenda e atendimento</button>
+          <button role="tab" id="aba-orcamento" aria-controls="p-orcamento" aria-selected="false" tabindex="-1">Orçamento e prontuário</button>
+          <button role="tab" id="aba-financeiro" aria-controls="p-financeiro" aria-selected="false" tabindex="-1">Financeiro</button>
+          <button role="tab" id="aba-docs" aria-controls="p-docs" aria-selected="false" tabindex="-1">Documentos e estoque</button>
+          <button role="tab" id="aba-equipe" aria-controls="p-equipe" aria-selected="false" tabindex="-1">Equipe e segurança</button>
+        </div>
+
+        <div class="paineis">
+          <article class="painel-aba" role="tabpanel" id="p-agenda" aria-labelledby="aba-agenda">
+            <div class="painel-txt">
+              <h3>O dia da clínica em uma tela</h3>
+              <p>A recepção vê quem chega, confirma pelo WhatsApp com a mensagem pronta e marca a chegada com um toque.</p>
+              <ul class="lista-check">
+                <li>Agenda por semana, dia e profissional, com encaixe e bloqueios</li>
+                <li>Confirmação, cobrança e aniversário com mensagem pronta no WhatsApp</li>
+                <li>Retornos previstos e fila de espera para preencher horários vagos</li>
+                <li>Ficha do paciente com próxima consulta e alertas de saúde no topo</li>
+              </ul>
+            </div>
+            <div class="painel-visual" aria-hidden="true">
+              <div class="v-agenda">
+                <div class="v-agenda-cab"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span></div>
+                <div class="v-agenda-grade">
+                  <i style="--c:1;--l:1;--h:2" class="ev a">Limpeza</i>
+                  <i style="--c:2;--l:2;--h:3" class="ev b">Canal</i>
+                  <i style="--c:3;--l:1;--h:2" class="ev c">Avaliação</i>
+                  <i style="--c:4;--l:3;--h:2" class="ev a">Restauração</i>
+                  <i style="--c:5;--l:1;--h:4" class="ev b">Implante</i>
+                  <i style="--c:1;--l:4;--h:2" class="ev c">Retorno</i>
+                  <i style="--c:3;--l:4;--h:3" class="ev a">Clareamento</i>
+                  <i style="--c:4;--l:6;--h:2" class="ev c">Encaixe</i>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="painel-aba" role="tabpanel" id="p-orcamento" aria-labelledby="aba-orcamento" hidden>
+            <div class="painel-txt">
+              <h3>Orçamento claro, que o paciente entende</h3>
+              <p>Marque os dentes no odontograma, escolha os procedimentos e imprima um plano com valores, condições de pagamento e assinatura.</p>
+              <ul class="lista-check">
+                <li>Odontograma com faces, arcadas e condições de cada dente</li>
+                <li>Condições propostas, como entrada no Pix e o resto no cartão</li>
+                <li>Impressão do plano de tratamento com as opções que você escolher</li>
+                <li>Prontuário, anamnese com alertas e exames (raio-X, tomografia, fotos)</li>
+              </ul>
+            </div>
+            <div class="painel-visual" aria-hidden="true">
+              <svg class="v-odonto" viewBox="0 0 320 150">
+                <g class="dentes">
+                  <path d="M14 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path d="M52 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path class="marcado" d="M90 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path d="M128 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path d="M166 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path class="marcado" d="M204 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path d="M242 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                  <path d="M280 30c0-10 7-14 14-14s14 4 14 14c0 14-4 30-8 40-2 5-10 5-12 0-4-10-8-26-8-40z"/>
+                </g>
+                <g class="v-orc-linhas">
+                  <rect x="14" y="96" width="292" height="16" rx="4"/><rect x="14" y="120" width="210" height="16" rx="4"/>
+                  <text x="22" y="108">16 · Restauração</text><text x="236" y="108">R$ 280</text>
+                  <text x="22" y="132">24 · Canal</text>
+                </g>
+              </svg>
+            </div>
+          </article>
+
+          <article class="painel-aba" role="tabpanel" id="p-financeiro" aria-labelledby="aba-financeiro" hidden>
+            <div class="painel-txt">
+              <h3>Saiba quanto entra, quanto sai e quanto vai sobrar</h3>
+              <p>A taxa de cada maquininha é descontada sozinha e a projeção mostra o saldo dos próximos dias antes de faltar dinheiro.</p>
+              <ul class="lista-check">
+                <li>Recebimentos no Pix, dinheiro, cartão, boleto e carnê</li>
+                <li>Maquininhas com taxa por bandeira e parcela, valor líquido automático</li>
+                <li>Contas fixas e variáveis com parcelas, caixa por usuário</li>
+                <li>Análise com gráficos, inadimplência, provisões e projeção do saldo</li>
+              </ul>
+            </div>
+            <div class="painel-visual" aria-hidden="true">
+              <svg class="v-fin" viewBox="0 0 320 170">
+                <g class="v-fin-grade"><line x1="10" y1="40" x2="310" y2="40"/><line x1="10" y1="80" x2="310" y2="80"/><line x1="10" y1="120" x2="310" y2="120"/></g>
+                <g class="v-fin-barras">
+                  <rect x="24" y="90" width="22" height="50" rx="4"/><rect x="74" y="72" width="22" height="68" rx="4"/><rect x="124" y="98" width="22" height="42" rx="4"/><rect x="174" y="58" width="22" height="82" rx="4"/><rect x="224" y="66" width="22" height="74" rx="4"/><rect x="274" y="44" width="22" height="96" rx="4"/>
+                </g>
+                <path class="v-fin-linha" d="M20 118 C60 110 70 96 100 92 S150 104 180 80 S240 62 300 40"/>
+                <circle class="v-fin-ponto" cx="300" cy="40" r="5"/>
+              </svg>
+            </div>
+          </article>
+
+          <article class="painel-aba" role="tabpanel" id="p-docs" aria-labelledby="aba-docs" hidden>
+            <div class="painel-txt">
+              <h3>Papel a menos, assinatura na tela</h3>
+              <p>Contratos e anamnese saem prontos com os dados do paciente e são assinados no próprio tablet ou celular.</p>
+              <ul class="lista-check">
+                <li>Contratos a partir de modelos, com assinatura, data e código de verificação</li>
+                <li>Anamnese com modelos editáveis e alertas de saúde</li>
+                <li>Estoque com lote, validade, saída por paciente e aviso de mínimo</li>
+                <li>Relatórios na tela, em Excel e em PDF</li>
+              </ul>
+            </div>
+            <div class="painel-visual" aria-hidden="true">
+              <div class="v-doc">
+                <span class="l" style="width:62%"></span><span class="l"></span><span class="l" style="width:88%"></span><span class="l" style="width:74%"></span><span class="l"></span><span class="l" style="width:40%"></span>
+                <svg viewBox="0 0 200 60" class="v-ass"><path d="M8 42c14-18 22-30 28-24s-12 30 0 26 18-30 26-24-6 22 4 20 14-16 22-16 4 14 14 12 20-10 34-14 24 4 50-2"/></svg>
+                <span class="v-ass-linha"></span>
+                <small>Assinado na tela · código 7F3A-91C2</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="painel-aba" role="tabpanel" id="p-equipe" aria-labelledby="aba-equipe" hidden>
+            <div class="painel-txt">
+              <h3>Cada pessoa vê só o que precisa</h3>
+              <p>Grupos com permissão por tela, dados sensíveis ocultos para quem não deve ver e registro de quem mudou o quê.</p>
+              <ul class="lista-check">
+                <li>Usuários e grupos com permissão de ver ou editar cada tela</li>
+                <li>Restrição de acesso por horário e por rede da clínica</li>
+                <li>Auditoria de todas as alterações</li>
+                <li>Cada clínica com o seu banco de dados separado e backup diário</li>
+              </ul>
+            </div>
+            <div class="painel-visual" aria-hidden="true">
+              <div class="v-perm">
+                <div class="v-perm-l"><span>Agenda</span><b class="sw on"></b><b class="sw on"></b></div>
+                <div class="v-perm-l"><span>Pacientes</span><b class="sw on"></b><b class="sw on"></b></div>
+                <div class="v-perm-l"><span>Financeiro</span><b class="sw on"></b><b class="sw"></b></div>
+                <div class="v-perm-l"><span>Relatórios</span><b class="sw"></b><b class="sw"></b></div>
+                <div class="v-perm-l"><span>Configurações</span><b class="sw"></b><b class="sw"></b></div>
+                <div class="v-perm-cab"><span>Recepção</span><span>Ver</span><span>Editar</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Oportunidades: o diferencial, em fundo tinta -->
+    <section class="secao tinta" id="oportunidades">
+      <div class="op-grade">
+        <div class="op-txt">
+          <h2>O sistema que corre atrás do paciente por você</h2>
+          <p>O funil de oportunidades se monta sozinho com o que já está no sistema. Você abre a tela e sabe para quem ligar hoje.</p>
+          <ul class="op-lista">
+            <li><b>Orçamentos não aprovados</b><span>Entram no funil no dia seguinte, com o valor e a mensagem de retomada pronta.</span></li>
+            <li><b>Retornos vencidos</b><span>Quem devia ter voltado aparece para contato, sem ninguém precisar lembrar.</span></li>
+            <li><b>Pacientes inativos</b><span>Um clique lista quem não aparece há um ano para uma campanha de reativação.</span></li>
+            <li><b>Indicações</b><span>Ranking de quem mais indica, com botão para agradecer pelo WhatsApp.</span></li>
+            <li><b>Metas do mês</b><span>Faturamento, pacientes novos e fechamentos, com o realizado ao lado.</span></li>
+          </ul>
+        </div>
+        <div class="op-captacao">
+          <div class="celular" aria-label="Exemplo do formulário público de captação no celular">
+            <div class="celular-tela">
+              <small>dontup.com.br/c/sua-clinica</small>
+              <strong>Agende sua avaliação</strong>
+              <span class="campo"><i>Seu nome</i><b data-digita="Marina Costa"></b></span>
+              <span class="campo"><i>Celular</i><b data-digita="(11) 98765-4321"></b></span>
+              <span class="campo"><i>O que você procura?</i><b data-digita="Clareamento"></b></span>
+              <span class="celular-btn" data-envia>Quero ser contatado</span>
+            </div>
+          </div>
+          <div class="op-legenda">
+            <h3>Link de captação</h3>
+            <p>Coloque no Instagram, no Google e no WhatsApp. Cada pedido cai direto no funil, com o consentimento da LGPD registrado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista completa -->
+    <section class="secao completa" aria-labelledby="t-completa">
+      <div class="cabeca">
+        <h2 id="t-completa">A lista completa</h2>
+        <p>Tudo o que já vem no Dontup no dia da inauguração.</p>
+      </div>
+      <div class="colunas">
+        <div>
+          <h3>Atendimento</h3>
+          <ul>
+            <li>Agenda semanal, diária e mensal</li><li>Encaixe, remarcação e bloqueios</li><li>Escala dos profissionais</li><li>Fila de espera</li><li>Retornos previstos</li><li>Confirmação pelo WhatsApp</li><li>Busca rápida com Ctrl+K</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Clínico</h3>
+          <ul>
+            <li>Cadastro objetivo com CEP automático</li><li>Prontuário e linha do tempo</li><li>Odontograma por face</li><li>Orçamentos e plano de tratamento</li><li>Ortodontia com mensalidades</li><li>Anamnese com alertas</li><li>Exames: raio-X, tomografia, fotos, PDF</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Financeiro</h3>
+          <ul>
+            <li>Recebimentos e estornos</li><li>Maquininhas com taxa automática</li><li>Boleto e carnê</li><li>Contas fixas e variáveis</li><li>Caixa por usuário</li><li>Fluxo de caixa e projeção</li><li>Provisões e inadimplência</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Crescimento</h3>
+          <ul>
+            <li>Funil de oportunidades</li><li>Link público de captação</li><li>Reativação de inativos</li><li>Ranking de indicações</li><li>Metas do mês</li><li>Mensagens prontas editáveis</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Gestão</h3>
+          <ul>
+            <li>Contratos com assinatura na tela</li><li>Estoque com validade e lote</li><li>Relatórios em PDF e Excel</li><li>Usuários, grupos e permissões</li><li>Auditoria de alterações</li><li>Tema claro e escuro</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como começar: sequência real -->
+    <section class="secao passos" aria-labelledby="t-passos">
+      <div class="cabeca">
+        <h2 id="t-passos">Do cadastro ao primeiro paciente em uma tarde</h2>
+      </div>
+      <ol class="trilha">
+        <li><span class="n">1</span><h3>Crie a conta da clínica</h3><p>Nome, e-mail e senha. A clínica ganha um endereço próprio e 30 dias para testar.</p></li>
+        <li><span class="n">2</span><h3>Cadastre a equipe e a agenda</h3><p>Profissionais, horários, procedimentos e maquininhas. Ajudamos a trazer seus pacientes.</p></li>
+        <li><span class="n">3</span><h3>Comece a atender</h3><p>Agende, faça o orçamento e receba. O funil começa a trabalhar no mesmo dia.</p></li>
+      </ol>
+    </section>
+
+    <!-- Planos -->
+    <section class="secao planos" id="planos" aria-labelledby="t-planos">
+      <div class="cabeca">
+        <h2 id="t-planos">Preço justo, sem taxa de implantação</h2>
+        <p>Valores de lançamento. Todos os planos começam com 30 dias grátis.</p>
+      </div>
+      <div class="planos-grade">
+        <article class="plano">
+          <h3>Essencial</h3>
+          <p class="preco"><span>R$</span>99<small>/mês</small></p>
+          <p class="plano-desc">Para o consultório que quer sair do papel e da planilha.</p>
+          <ul class="lista-check">
+            <li>Agenda, pacientes e prontuário</li><li>Orçamentos com odontograma</li><li>Financeiro completo e relatórios</li><li>Exames do paciente</li><li>Até 3 usuários</li>
+          </ul>
+          <a class="btn btn-linha" href="#lancamento">Quero ser avisado</a>
+        </article>
+        <article class="plano destaque">
+          <p class="plano-tag">Mais completo</p>
+          <h3>Completo</h3>
+          <p class="preco"><span>R$</span>179<small>/mês</small></p>
+          <p class="plano-desc">Para a clínica que quer crescer e não deixar paciente para trás.</p>
+          <ul class="lista-check">
+            <li>Tudo do Essencial</li><li>Funil de oportunidades e metas</li><li>Link de captação e indicações</li><li>Contratos com assinatura e estoque</li><li>Usuários ilimitados</li>
+          </ul>
+          <a class="btn btn-coral" href="#lancamento">Quero ser avisado</a>
+        </article>
+      </div>
+      <p class="planos-nota">Lembretes automáticos por WhatsApp e assistente com IA chegam depois da inauguração, como adicionais.</p>
+    </section>
+
+    <!-- Segurança -->
+    <section class="secao seguranca" aria-labelledby="t-seg">
+      <div class="seg-grade">
+        <h2 id="t-seg">Os dados dos seus pacientes ficam protegidos</h2>
+        <dl>
+          <div><dt>Banco separado por clínica</dt><dd>Os dados de uma clínica nunca se misturam com os de outra.</dd></div>
+          <div><dt>Backup todos os dias</dt><dd>Cópia diária guardada fora do servidor principal.</dd></div>
+          <div><dt>Conexão criptografada</dt><dd>Acesso só por HTTPS, com senhas protegidas por hash forte.</dd></div>
+          <div><dt>Pensado para a LGPD</dt><dd>Consentimento registrado na captação, permissões por pessoa e auditoria.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Inauguração -->
+    <section class="lancamento" id="lancamento" aria-labelledby="t-lanc">
+      <div class="lanc-in">
+        <p class="selo selo-escuro"><span class="pulso" aria-hidden="true"></span><span data-inauguracao>Inauguração em breve</span></p>
+        <h2 id="t-lanc" class="lanc-titulo">A agenda cheia está chegando.</h2>
+        <p>Entre na lista e seja avisado no dia da inauguração. As primeiras clínicas ganham ajuda para trazer os pacientes do sistema antigo.</p>
+        <div class="lanc-acoes">
+          <a class="btn btn-coral btn-lg" data-lista href="#lancamento">Quero ser avisado</a>
+          <span class="acesso" data-acesso>
+            <a class="btn btn-claro btn-lg" data-sistema aria-disabled="true" role="link" tabindex="0" aria-describedby="dica-acesso-2">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              Acessar sistema
+            </a>
+            <span class="dica" id="dica-acesso-2" role="tooltip">Liberado no dia da inauguração</span>
+          </span>
+        </div>
+        <p class="lanc-msg" data-lista-msg aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Dúvidas -->
+    <section class="secao duvidas" id="duvidas" aria-labelledby="t-duv">
+      <div class="cabeca"><h2 id="t-duv">Dúvidas comuns</h2></div>
+      <div class="faq">
+        <details><summary>Preciso instalar alguma coisa?</summary><p>Não. O Dontup funciona no navegador do computador, do tablet e do celular. É só entrar com o código da clínica, usuário e senha.</p></details>
+        <details><summary>Consigo trazer os pacientes do meu sistema atual?</summary><p>Sim. Nas primeiras clínicas, ajudamos a importar o cadastro de pacientes a partir de planilha ou da exportação do sistema antigo.</p></details>
+        <details><summary>O WhatsApp é enviado automaticamente?</summary><p>No lançamento, os botões abrem a conversa com a mensagem pronta e a recepção envia. O envio automático de lembretes chega depois, pela API oficial do WhatsApp.</p></details>
+        <details><summary>Quantas pessoas da equipe podem usar?</summary><p>No Essencial, até 3 usuários. No Completo, quantos a clínica precisar, cada um com as permissões do seu grupo.</p></details>
+        <details><summary>E se eu quiser cancelar?</summary><p>Sem fidelidade. Você pode exportar seus relatórios e pedir a cópia dos seus dados a qualquer momento.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-in">
+      <a class="marca" href="#inicio" aria-label="Dontup, voltar ao início">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#fffbf4"/><path d="M10 9c-2 0-3.5 1.8-3.5 4.4 0 3 1.2 4.6 2 7.6.5 2 1 3.5 2.2 3.5 1.4 0 1.6-3 2.4-4.6.4-.8.8-1.2 1.4-1.2h3c.6 0 1 .4 1.4 1.2.8 1.6 1 4.6 2.4 4.6 1.2 0 1.7-1.5 2.2-3.5.8-3 2-4.6 2-7.6C25.5 10.8 24 9 22 9c-2 0-3.3 1.2-6 1.2S12 9 10 9z" fill="#e5502e"/></svg>
+        <span>Dontup</span>
+      </a>
+      <p>Sistema de gestão para clínicas odontológicas.</p>
+      <p class="rodape-pe">© <span data-ano>2026</span> Dontup. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
