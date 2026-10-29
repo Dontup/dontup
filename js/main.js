@@ -53,7 +53,11 @@
 
   // Topo: fundo ao rolar e seção ativa no menu
   const topo = $('#topo');
-  const aoRolar = () => topo.classList.toggle('rolou', scrollY > 12);
+  const aoRolar = () => {
+    topo.classList.toggle('rolou', scrollY > 12);
+    const total = document.documentElement.scrollHeight - innerHeight;
+    topo.style.setProperty('--leitura', total > 0 ? (scrollY / total).toFixed(4) : 0);
+  };
   addEventListener('scroll', aoRolar, { passive: true });
   aoRolar();
   const links = $$('.menu a');
@@ -152,8 +156,38 @@
     });
   };
 
+  // Cursor demonstrativo: vai até o cartão, "pega" e acompanha até a nova coluna.
+  const demo = $('.hero-demo');
+  const cursor = $('[data-cursor]');
+  let cursorPos = { x: 0, y: 0 };
+  const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+  const pontoDo = (el) => {
+    const r = el.getBoundingClientRect();
+    const b = demo.getBoundingClientRect();
+    return { x: r.left - b.left + r.width * .62, y: r.top - b.top + r.height * .55 };
+  };
+  const cursorPara = (p, ms) => {
+    const a = cursor.animate([{ transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)` }, { transform: `translate(${p.x}px, ${p.y}px)` }],
+      { duration: ms, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'forwards' });
+    cursorPos = p;
+    return a.finished;
+  };
+  let primeiro = true;
+  const arrastar = async (c, mudar) => {
+    if (primeiro) { cursorPos = { x: demo.offsetWidth * .9, y: demo.offsetHeight * .95 }; primeiro = false; }
+    cursor.classList.add('on');
+    await cursorPara(pontoDo(c), 520);
+    cursor.classList.add('clica');
+    await espera(140);
+    mover(mudar);
+    await cursorPara(pontoDo(c), 750);
+    cursor.classList.remove('clica');
+    await espera(250);
+    cursor.classList.remove('on');
+  };
+
   let passo = 0;
-  const ciclo = () => {
+  const ciclo = async () => {
     passo++;
     // Prioridade: fechar quem está em avaliação; senão avançar o funil; de vez em quando, chega lead novo.
     if (passo % 4 === 0) {
@@ -161,16 +195,18 @@
       avisar('Novo pedido pelo link de captação');
     } else if (cols[2].children.length) {
       const c = cols[2].firstElementChild;
-      mover(() => cols[3].prepend(c));
+      await arrastar(c, () => cols[3].prepend(c));
       c.classList.add('chegou');
       setTimeout(() => c.classList.remove('chegou'), 800);
       ganhoMes += +c.dataset.v;
       avisar(`${c.children[0].textContent} fechou: ${brl(+c.dataset.v)}`);
     } else if (cols[1].children.length) {
-      mover(() => cols[2].append(cols[1].firstElementChild));
+      const c = cols[1].firstElementChild;
+      await arrastar(c, () => cols[2].append(c));
       avisar('Avaliação marcada pela recepção');
     } else if (cols[0].children.length) {
-      mover(() => cols[1].append(cols[0].firstElementChild));
+      const c = cols[0].firstElementChild;
+      await arrastar(c, () => cols[1].append(c));
       avisar('Orçamento parado há 2 dias: hora de ligar');
     }
     // Mantém o quadro enxuto
@@ -180,7 +216,7 @@
     atualizaKpis();
   };
   let relogio = null;
-  const liga = () => { if (!relogio && !calmo) relogio = setInterval(ciclo, 2600); };
+  const liga = () => { if (!relogio && !calmo) relogio = setInterval(ciclo, 3200); };
   const desliga = () => { clearInterval(relogio); relogio = null; };
   new IntersectionObserver(([e]) => (e.isIntersecting ? liga() : desliga()), { threshold: .2 }).observe(quadro);
   document.addEventListener('visibilitychange', () => (document.hidden ? desliga() : null));
@@ -198,11 +234,19 @@
       if (ativo) { void p.offsetWidth; p.classList.add('entra'); }
     });
     if (foco) aba.focus();
-    if (matchMedia('(max-width: 960px)').matches) aba.scrollIntoView({ block: 'nearest', inline: 'center', behavior: calmo ? 'auto' : 'smooth' });
+    // No celular as abas rolam na horizontal: centraliza a ativa sem mexer na rolagem da página.
+    if (listaAbas.scrollWidth > listaAbas.clientWidth) {
+      listaAbas.scrollTo({ left: aba.offsetLeft - (listaAbas.clientWidth - aba.offsetWidth) / 2, behavior: calmo ? 'auto' : 'smooth' });
+    }
   };
+  // Avanço automático enquanto ninguém mexe; a barra de progresso da aba dita o tempo (pausa com o mouse em cima).
+  const listaAbas = $('.abas');
+  const pararAuto = () => listaAbas.classList.remove('auto');
   abas.forEach((a, i) => {
-    a.addEventListener('click', () => selecionar(a));
+    $('.prog', a).addEventListener('animationend', () => selecionar(abas[(i + 1) % abas.length]));
+    a.addEventListener('click', () => { pararAuto(); selecionar(a); });
     a.addEventListener('keydown', (e) => {
+      pararAuto();
       const mapa = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
       if (e.key in mapa) { e.preventDefault(); selecionar(abas[(i + mapa[e.key] + abas.length) % abas.length], true); }
       if (e.key === 'Home') { e.preventDefault(); selecionar(abas[0], true); }
@@ -214,6 +258,7 @@
   const obsExp = new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return;
     $('.painel-aba:not([hidden])').classList.add('entra');
+    if (!calmo) listaAbas.classList.add('auto');
     obsExp.disconnect();
   }, { threshold: .25 });
   obsExp.observe(explorador);
@@ -222,7 +267,6 @@
   const campos = $$('[data-digita]');
   const enviar = $('[data-envia]');
   let rodandoCel = false;
-  const espera = (ms) => new Promise((r) => setTimeout(r, ms));
   const digitar = async (el) => {
     el.classList.add('digitando');
     const txt = el.dataset.digita;
@@ -264,4 +308,138 @@
   revelar.forEach((el) => obs.observe(el));
   const trilha = $('.trilha');
   new IntersectionObserver(([e], o) => { if (e.isIntersecting) { trilha.classList.add('visivel'); o.disconnect(); } }, { threshold: .4 }).observe(trilha);
+
+  // Títulos de seção entram palavra por palavra
+  const titulos = $$('.cabeca h2, .op-txt h2, .seg-grade h2, .sim-txt h2, .lanc-titulo');
+  titulos.forEach((h) => {
+    const palavras = h.textContent.trim().split(/\s+/);
+    h.setAttribute('aria-label', h.textContent.trim());
+    h.textContent = '';
+    palavras.forEach((p, i) => {
+      const s = document.createElement('span');
+      s.className = 'p';
+      s.setAttribute('aria-hidden', 'true');
+      s.style.setProperty('--i', i);
+      s.textContent = p;
+      h.append(s, i < palavras.length - 1 ? ' ' : '');
+    });
+    h.setAttribute('data-palavras', '');
+    h.closest('[data-revela]')?.removeAttribute('data-revela');
+  });
+  const obsTit = new IntersectionObserver((itens) => itens.forEach((it) => {
+    if (it.isIntersecting) { it.target.classList.add('visivel'); obsTit.unobserve(it.target); }
+  }), { threshold: .3 });
+  titulos.forEach((h) => obsTit.observe(h));
+
+  // Números que contam ao aparecer
+  const contar = (el) => {
+    const alvo = +el.dataset.conta;
+    const dec = +(el.dataset.dec || 0);
+    const fmt = (v) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    if (calmo) { el.textContent = fmt(alvo); return; }
+    const t0 = performance.now();
+    const passo = (t) => {
+      const k = Math.min(1, (t - t0) / 1100);
+      el.textContent = fmt(alvo * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(passo);
+    };
+    requestAnimationFrame(passo);
+  };
+
+  // Um dia na clínica: o passo no meio da tela escolhe a cena
+  const passosDia = $$('.dia-passo');
+  const cenas = $$('.cena');
+  const telaDia = $('.dia-tela');
+  const horaDia = $('[data-dia-hora]');
+  let cenaAtual = -1;
+  const confirmar = (cena) => {
+    const botoes = $$('.conf', cena);
+    botoes.forEach((b) => { b.classList.add('pendente'); b.classList.remove('virou'); b.textContent = 'Confirmar'; });
+    botoes.forEach((b, i) => setTimeout(() => {
+      if (!cena.classList.contains('on')) return;
+      b.classList.remove('pendente'); b.classList.add('virou'); b.textContent = 'Confirmado';
+    }, calmo ? 0 : 700 + i * 380));
+  };
+  const mostrarCena = (i) => {
+    if (i === cenaAtual) return;
+    cenaAtual = i;
+    passosDia.forEach((p, j) => p.classList.toggle('ativo', j === i));
+    cenas.forEach((c, j) => c.classList.toggle('on', j === i));
+    horaDia.textContent = $('time', passosDia[i]).textContent;
+    telaDia.style.setProperty('--dia-p', ((i + 1) / cenas.length).toFixed(3));
+    const cena = cenas[i];
+    if ($('.conf', cena)) confirmar(cena);
+    $$('[data-conta]', cena).forEach(contar);
+  };
+  const obsDia = new IntersectionObserver((itens) => itens.forEach((it) => {
+    if (it.isIntersecting) mostrarCena(+it.target.dataset.cena);
+  }), { rootMargin: matchMedia('(max-width: 960px)').matches ? '-62% 0px -30% 0px' : '-48% 0px -48% 0px' });
+  passosDia.forEach((p) => obsDia.observe(p));
+  mostrarCena(0);
+
+  // Simulador da maquininha (taxas de exemplo)
+  const TAXAS = { pix: [0, 'na hora'], debito: [1.39, 'em 1 dia'], vista: [3.15, 'em 30 dias'] };
+  const taxaParcelado = (n) => [3.15 + (n - 1) * 0.72, 'em 30 dias, parcela a parcela'];
+  const sim = $('[data-sim]');
+  const sValor = $('[data-sim-valor]');
+  const sParc = $('[data-sim-parcelas]');
+  const caixaParc = $('[data-sim-parc]');
+  const moeda = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const out = { valor: $('[data-sim-valor-txt]'), parc: $('[data-sim-parc-txt]'), taxa: $('[data-sim-taxa]'), pct: $('[data-sim-pct]'), liq: $('[data-sim-liq]'), quando: $('[data-sim-quando]'), barra: $('[data-sim-barra]') };
+  let liqAtual = +sValor.value;
+  const trilhoRange = (r) => r.style.setProperty('--pct', ((r.value - r.min) / (r.max - r.min)) * 100 + '%');
+  const calcular = (anima) => {
+    const valor = +sValor.value;
+    const forma = $('input[name="forma"]:checked', sim).value;
+    caixaParc.hidden = forma !== 'parc';
+    const n = +sParc.value;
+    const [pct, quando] = forma === 'parc' ? taxaParcelado(n) : TAXAS[forma];
+    const taxa = Math.round(valor * pct) / 100;
+    const liq = valor - taxa;
+    out.valor.textContent = 'R$ ' + valor.toLocaleString('pt-BR');
+    out.parc.textContent = n + 'x';
+    out.taxa.textContent = moeda(taxa);
+    out.pct.textContent = pct.toLocaleString('pt-BR', { maximumFractionDigits: 2 }) + '%';
+    out.quando.textContent = quando;
+    out.barra.style.width = (100 - pct) + "%";
+    trilhoRange(sValor); trilhoRange(sParc);
+    if (anima && !calmo) {
+      const de = liqAtual, t0 = performance.now();
+      const passo = (t) => {
+        const k = Math.min(1, (t - t0) / 450);
+        out.liq.textContent = moeda(de + (liq - de) * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(passo);
+      };
+      requestAnimationFrame(passo);
+    } else {
+      out.liq.textContent = moeda(liq);
+    }
+    liqAtual = liq;
+  };
+  sim.addEventListener('input', () => calcular(true));
+  sim.addEventListener('change', (e) => {
+    if (e.target.name !== 'forma') return;
+    const caixa = out.liq.parentElement;
+    caixa.classList.remove('pisca'); void caixa.offsetWidth; caixa.classList.add('pisca');
+  });
+  calcular(false);
+
+  // Planos: brilho segue o mouse
+  $$('.plano').forEach((p) => p.addEventListener('pointermove', (e) => {
+    const r = p.getBoundingClientRect();
+    p.style.setProperty('--mx', e.clientX - r.left + 'px');
+    p.style.setProperty('--my', e.clientY - r.top + 'px');
+  }));
+
+  // Janela do topo inclina levemente com o mouse
+  const tilt = $('[data-tilt]');
+  if (!calmo && matchMedia('(pointer: fine)').matches) {
+    demo.addEventListener('pointermove', (e) => {
+      const r = demo.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      tilt.style.transform = `perspective(1400px) rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg)`;
+    });
+    demo.addEventListener('pointerleave', () => { tilt.style.transform = ''; });
+  }
 })();

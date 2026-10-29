@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/produto.css">
   <script src="js/config.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
@@ -28,6 +29,7 @@
         <span>Dontup</span>
       </a>
       <nav class="menu" aria-label="Seções">
+        <a href="#dia">Na prática</a>
         <a href="#recursos">Recursos</a>
         <a href="#oportunidades">Oportunidades</a>
         <a href="#planos">Planos</a>
@@ -46,7 +48,8 @@
       </div>
     </div>
     <nav class="menu-movel" id="menu-movel" aria-label="Seções" hidden>
-      <a href="#recursos">Recursos</a>
+      <a href="#dia">Na prática</a>
+        <a href="#recursos">Recursos</a>
       <a href="#oportunidades">Oportunidades</a>
       <a href="#planos">Planos</a>
       <a href="#duvidas">Dúvidas</a>
@@ -74,6 +77,7 @@
       </div>
 
       <div class="hero-demo" aria-label="Demonstração: o funil de oportunidades movendo pacientes de orçamento enviado até fechado">
+        <div class="tilt" data-tilt>
         <div class="janela">
           <div class="janela-barra" aria-hidden="true"><i></i><i></i><i></i><span>app.dontup.com.br</span></div>
           <div class="janela-corpo">
@@ -100,6 +104,8 @@
             </div>
           </div>
         </div>
+        </div>
+        <svg class="cursor" data-cursor viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z"/></svg>
         <div class="aviso-flutuante" data-toast aria-live="polite"></div>
       </div>
     </section>
@@ -112,6 +118,82 @@
       </div>
     </section>
 
+    <!-- Um dia na clínica: rolagem guiada com a tela do sistema fixa -->
+    <section class="dia" id="dia" aria-labelledby="t-dia">
+      <div class="dia-in">
+        <div class="cabeca">
+          <h2 id="t-dia">Um dia na clínica com o Dontup</h2>
+          <p>Role a página e acompanhe o que o sistema faz por você, da primeira consulta ao fechamento do caixa.</p>
+        </div>
+        <div class="dia-grade">
+          <ol class="dia-passos">
+            <li class="dia-passo" data-cena="0"><time>08:00</time><h3>A agenda já está confirmada</h3><p>A recepção abre o dia, vê quem vem e confirma com um toque no WhatsApp. A mensagem sai pronta, com nome, dia e horário.</p></li>
+            <li class="dia-passo" data-cena="1"><time>09:30</time><h3>A ficha avisa antes de você perguntar</h3><p>Alergias e alertas da anamnese aparecem no topo da ficha, com a próxima consulta, o retorno previsto e os exames do paciente.</p></li>
+            <li class="dia-passo" data-cena="2"><time>11:00</time><h3>O orçamento se monta no odontograma</h3><p>Marque os dentes, escolha os procedimentos e o total se calcula. Proponha entrada no Pix e o resto no cartão, e imprima para o paciente.</p></li>
+            <li class="dia-passo" data-cena="3"><time>14:00</time><h3>O pagamento já cai com a taxa descontada</h3><p>Escolha a maquininha e as parcelas. O sistema calcula a taxa, mostra o valor líquido e a data em que o dinheiro entra.</p></li>
+            <li class="dia-passo" data-cena="4"><time>17:00</time><h3>A lista de quem ligar hoje está pronta</h3><p>Orçamentos parados, retornos vencidos e pedidos do link de captação aparecem juntos, com a mensagem certa para cada um.</p></li>
+            <li class="dia-passo" data-cena="5"><time>19:00</time><h3>O caixa fecha sozinho</h3><p>Entradas, saídas e o saldo projetado dos próximos dias, para decidir com números e não com palpite.</p></li>
+          </ol>
+          <div class="dia-tela-wrap">
+            <div class="dia-tela" aria-hidden="true">
+              <div class="dia-relogio"><span data-dia-hora>08:00</span><i></i></div>
+
+              <div class="cena on" data-i="0">
+                <h4>Agenda de hoje</h4>
+                <div class="ag-linha"><time>08:30</time><b>Juliana Ribeiro</b><span>Limpeza</span><em class="conf">Confirmado</em></div>
+                <div class="ag-linha"><time>09:30</time><b>Carlos Mendes</b><span>Avaliação</span><em class="conf">Confirmado</em></div>
+                <div class="ag-linha"><time>10:00</time><b>Beatriz Lima</b><span>Manutenção</span><em class="conf">Confirmado</em></div>
+                <div class="ag-linha"><time>11:00</time><b>Rafael Torres</b><span>Canal</span><em class="conf">Confirmado</em></div>
+                <div class="ag-linha"><time>14:00</time><b>Fernanda Oliveira</b><span>Lentes</span><em class="conf">Confirmado</em></div>
+                <div class="zap-bolha">Oi, Fernanda! Confirmando sua consulta amanhã às 14h. Podemos confirmar?</div>
+              </div>
+
+              <div class="cena" data-i="1">
+                <div class="ficha-topo"><span class="avatar">CM</span><div><b>Carlos Mendes</b><small>42 anos · ficha 1.284</small></div></div>
+                <div class="alerta">Alergia a penicilina</div>
+                <div class="ficha-info"><div><small>Próxima consulta</small><b>Hoje, 09:30</b></div><div><small>Retorno previsto</small><b>Em 6 meses</b></div></div>
+                <div class="ficha-exames"><small>Exames</small><div><i class="ex raio"></i><i class="ex tomo"></i><i class="ex foto"></i></div></div>
+              </div>
+
+              <div class="cena" data-i="2">
+                <h4>Orçamento</h4>
+                <div class="orc-dentes"><i></i><i class="m"></i><i></i><i></i><i class="m"></i><i></i><i class="m"></i><i></i></div>
+                <div class="orc-item"><span>16 · Restauração</span><b>R$ 280</b></div>
+                <div class="orc-item"><span>24 · Canal</span><b>R$ 1.450</b></div>
+                <div class="orc-item"><span>26 · Coroa</span><b>R$ 1.900</b></div>
+                <div class="orc-total"><span>Total</span><b data-conta="3630">R$ 3.630</b></div>
+                <div class="orc-cond">Entrada de R$ 630 no Pix + 5x de R$ 600 no cartão</div>
+              </div>
+
+              <div class="cena" data-i="3">
+                <h4>Recebimento</h4>
+                <div class="rec-maq"><span class="maq"></span><div><b>Maquininha da recepção</b><small>Crédito em 3x</small></div></div>
+                <div class="rec-l"><span>Valor cobrado</span><b>R$ 1.200,00</b></div>
+                <div class="rec-l taxa"><span>Taxa 4,59%</span><b>− R$ 55,08</b></div>
+                <div class="rec-l liq"><span>Você recebe</span><b data-conta="1144.92" data-dec="2">R$ 1.144,92</b></div>
+                <div class="rec-data">Cai na conta em 30 dias</div>
+              </div>
+
+              <div class="cena" data-i="4">
+                <h4>Para ligar hoje</h4>
+                <div class="op-l"><b>Beatriz Lima</b><span class="tag t-orc">Orçamento parado</span><em>R$ 3.600</em></div>
+                <div class="op-l"><b>Lucas Almeida</b><span class="tag t-ret">Retorno vencido</span><em>Limpeza</em></div>
+                <div class="op-l"><b>Marina Costa</b><span class="tag t-lead">Link de captação</span><em>Clareamento</em></div>
+                <div class="op-l"><b>Pedro Henrique</b><span class="tag t-ret">Inativo há 1 ano</span><em>Reativar</em></div>
+              </div>
+
+              <div class="cena" data-i="5">
+                <h4>Caixa do dia</h4>
+                <div class="cx-kpis"><div><small>Entradas</small><b class="menta">R$ 6.840</b></div><div><small>Saídas</small><b>R$ 1.210</b></div></div>
+                <svg class="cx-graf" viewBox="0 0 300 120"><path class="cx-area" d="M0 100 L0 86 C40 80 60 70 100 66 S170 58 200 44 S260 30 300 20 L300 100 Z"/><path class="cx-linha" d="M0 86 C40 80 60 70 100 66 S170 58 200 44 S260 30 300 20"/></svg>
+                <div class="cx-pe"><span>Saldo projetado em 30 dias</span><b>R$ 24.310</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Recursos: explorador -->
     <section class="secao recursos" id="recursos">
       <div class="cabeca">
@@ -121,11 +203,11 @@
 
       <div class="explorador" data-explorador>
         <div class="abas" role="tablist" aria-label="Áreas do sistema">
-          <button role="tab" id="aba-agenda" aria-controls="p-agenda" aria-selected="true">Agenda e atendimento</button>
-          <button role="tab" id="aba-orcamento" aria-controls="p-orcamento" aria-selected="false" tabindex="-1">Orçamento e prontuário</button>
-          <button role="tab" id="aba-financeiro" aria-controls="p-financeiro" aria-selected="false" tabindex="-1">Financeiro</button>
-          <button role="tab" id="aba-docs" aria-controls="p-docs" aria-selected="false" tabindex="-1">Documentos e estoque</button>
-          <button role="tab" id="aba-equipe" aria-controls="p-equipe" aria-selected="false" tabindex="-1">Equipe e segurança</button>
+          <button role="tab" id="aba-agenda" aria-controls="p-agenda" aria-selected="true">Agenda e atendimento<span class="prog" aria-hidden="true"></span></button>
+          <button role="tab" id="aba-orcamento" aria-controls="p-orcamento" aria-selected="false" tabindex="-1">Orçamento e prontuário<span class="prog" aria-hidden="true"></span></button>
+          <button role="tab" id="aba-financeiro" aria-controls="p-financeiro" aria-selected="false" tabindex="-1">Financeiro<span class="prog" aria-hidden="true"></span></button>
+          <button role="tab" id="aba-docs" aria-controls="p-docs" aria-selected="false" tabindex="-1">Documentos e estoque<span class="prog" aria-hidden="true"></span></button>
+          <button role="tab" id="aba-equipe" aria-controls="p-equipe" aria-selected="false" tabindex="-1">Equipe e segurança<span class="prog" aria-hidden="true"></span></button>
         </div>
 
         <div class="paineis">
@@ -256,6 +338,40 @@
             </div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Simulador: a conta da maquininha -->
+    <section class="secao simulador" aria-labelledby="t-sim">
+      <div class="sim-grade">
+        <div class="sim-txt">
+          <h2 id="t-sim">Pare de fazer conta de taxa na calculadora</h2>
+          <p>Cadastre as taxas de cada maquininha uma vez. Em todo recebimento o Dontup desconta a taxa certa e mostra quanto entra de verdade e quando.</p>
+          <p class="sim-nota">Experimente ao lado. As taxas são um exemplo; no sistema você usa as suas.</p>
+        </div>
+        <form class="sim" data-sim onsubmit="return false">
+          <label class="sim-campo" for="sim-valor">
+            <span>Valor do tratamento</span>
+            <output data-sim-valor-txt>R$ 2.400</output>
+          </label>
+          <input type="range" id="sim-valor" min="200" max="15000" step="100" value="2400" data-sim-valor>
+          <fieldset class="sim-formas">
+            <legend>Forma de pagamento</legend>
+            <label><input type="radio" name="forma" value="pix" checked><span>Pix</span></label>
+            <label><input type="radio" name="forma" value="debito"><span>Débito</span></label>
+            <label><input type="radio" name="forma" value="vista"><span>Crédito</span></label>
+            <label><input type="radio" name="forma" value="parc"><span>Parcelado</span></label>
+          </fieldset>
+          <div class="sim-parc" data-sim-parc hidden>
+            <label for="sim-parcelas"><span>Parcelas</span><output data-sim-parc-txt>6x</output></label>
+            <input type="range" id="sim-parcelas" min="2" max="12" step="1" value="6" data-sim-parcelas>
+          </div>
+          <div class="sim-res" aria-live="polite">
+            <div><small>Taxa</small><b data-sim-taxa>R$ 0,00</b><i data-sim-pct>0%</i></div>
+            <div class="sim-liq"><small>Você recebe</small><b data-sim-liq>R$ 2.400,00</b><i data-sim-quando>na hora</i></div>
+          </div>
+          <div class="sim-barra" aria-hidden="true"><i data-sim-barra></i></div>
+        </form>
       </div>
     </section>
 
